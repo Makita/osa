@@ -1,26 +1,40 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import './App.scss';
+
+import Header from './header/header';
+import Navibar from './navbar/navbar';
+import Content from './content/content';
+import Footer from './footer/footer';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      page: this.formatPageName(window.location.hash) || "info",
+    }
+    this.handleClick.bind(this);
+  }
+
+  formatPageName(name) {
+    return name.toLowerCase().replace('#', '');
+  }
+
+  handleClick(e) {
+    let src = e.target || e.srcElement;
+    this.setState({
+      page: this.formatPageName(src.innerHTML),
+    });
+    console.log(this.formatPageName(src.innerHTML));
+  }
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      <React.Fragment>
+        <Header />
+        <Navibar page={this.state.page} handleClick={this.handleClick} app={this} />
+        <Content page={this.state.page} handleClick={this.handleClick} app={this} />
+        <Footer />
+      </React.Fragment>
     );
   }
 }
