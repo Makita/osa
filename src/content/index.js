@@ -3,24 +3,11 @@ import React, { Component } from 'react';
 class Index extends Component {
   render() {
     return (
-      <ul>
-        <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-        <li>Nullam sed lorem vel ex blandit vestibulum.</li>
-        <li>Quisque varius nisi eget ex malesuada, sit amet pretium ipsum varius.</li>
-        <li>Nullam ut eros quis libero imperdiet vestibulum.</li>
-        <li>Mauris finibus velit in feugiat dignissim.</li>
-        <li>Sed mollis nisl non magna facilisis, in elementum nibh ullamcorper.</li>
-        <li>Nam a lorem hendrerit, pharetra tellus sit amet, elementum nunc.</li>
-        <li>Morbi consectetur elit sed neque venenatis pharetra.</li>
-        <li>Aenean aliquet arcu vitae egestas hendrerit.</li>
-        <li>Integer cursus lorem sit amet lacus maximus malesuada.</li>
-        <li>Aenean vel mauris sed ante scelerisque auctor.</li>
-        <li>Duis eget nisl pharetra magna dapibus sagittis at ut ipsum.</li>
-        <li>Mauris consequat lorem id mi pharetra tempor.</li>
-        <li>Donec in sem lobortis, ultrices justo a, malesuada tellus.</li>
-        <li>Praesent ultrices ipsum id felis volutpat congue.</li>
-        <li>Maecenas placerat ex quis dignissim dignissim.</li>
-      </ul>
+      <React.Fragment>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam lobortis lacus at justo placerat gravida. Donec at dignissim nibh, vel aliquet libero. Aliquam pharetra mi eu elementum sodales. Aenean pulvinar, ante convallis convallis ornare, ante arcu accumsan arcu, hendrerit blandit lectus risus vitae urna. Phasellus varius dolor sed risus gravida ornare. Aenean vel libero nisl. Duis et eleifend orci. Duis sed fermentum tortor. Nam faucibus nibh a augue elementum, in feugiat urna aliquam. Nulla finibus nunc sit amet nisl sagittis tristique. Sed vulputate magna mauris, in auctor quam lacinia et. Sed vitae vehicula tellus. Praesent ac massa eget augue ultricies efficitur ac id dui. Nam lobortis quis eros vehicula bibendum.</p>
+        <p>Curabitur in lacus ac ex sollicitudin rhoncus. Sed vestibulum, felis sed luctus viverra, turpis mi porttitor purus, vitae porttitor mi lacus id justo. Donec sit amet faucibus erat. Integer posuere mauris eros, vel maximus sapien vulputate a. Duis id augue eu dolor ullamcorper congue id non metus. Sed efficitur vulputate condimentum. Proin nunc turpis, posuere eu ligula eget, laoreet tempus velit. Praesent et vehicula nisl. Phasellus ligula metus, consequat vitae est vel, sodales mollis arcu. Integer ipsum arcu, aliquet ut tortor sed, feugiat faucibus leo. Nulla dictum augue non arcu tempus vestibulum. Ut ipsum ipsum, interdum et orci ut, facilisis varius risus. Curabitur tincidunt orci in nulla porttitor tincidunt bibendum vitae magna. Nullam purus ante, fringilla non auctor vel, interdum eu mauris.</p>
+        <p>Quisque quis posuere lorem. Vivamus tortor enim, sodales id mi at, ultricies fringilla lectus. Sed non sem in justo sagittis imperdiet et sit amet sapien. Praesent gravida mi vel tempus vehicula. Duis sed posuere tellus. Aenean vitae purus ultricies, vestibulum ligula et, lacinia eros. Quisque vitae ligula venenatis, accumsan velit eget, laoreet lacus.</p>
+      </React.Fragment>
     );
   }
 }

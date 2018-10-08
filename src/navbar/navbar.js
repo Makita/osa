@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Navbar, NavItem, Nav } from 'react-bootstrap';
+import { Navbar, NavItem, Nav, NavDropdown, MenuItem } from 'react-bootstrap';
 
 function NavLink(props) {
   var hrefFormatted = "#" + props.text.toLowerCase().replace(' ', '_');
@@ -19,7 +19,7 @@ function NavLink(props) {
 }
 
 function NavLinks(props) {
-  let texts = ["Info", "Appointment", "Contact", "Lorem", "Ipsum", "Dolor"];
+  let texts = ["Info", "Services"];
   return texts.map((text) =>
     <NavLink key={text} text={text} handleClick={props.handleClick} app={props.app} page={props.page} />
   );
@@ -31,6 +31,10 @@ class Navibar extends Component {
       <Navbar>
         <Nav>
           <NavLinks handleClick={this.props.handleClick} app={this.props.app} page={this.props.page} />
+          <NavDropdown eventKey="1" title="Appointments">
+            <MenuItem eventKey="1.1" href="#appointment" onClick={this.props.handleClick.bind(this.props.app)}>Make an Appointment</MenuItem>
+            <MenuItem eventKey="1.2" href="#schedule">Current Bookings</MenuItem>
+          </NavDropdown>
         </Nav>
       </Navbar>
     );

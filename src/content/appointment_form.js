@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { FormGroup, FormControl, ControlLabel, HelpBlock, Button } from 'react-bootstrap';
+import { FormGroup, FormControl, ControlLabel, Checkbox, HelpBlock, OverlayTrigger, Tooltip, Button } from 'react-bootstrap';
 
 function FieldGroup({id, label, help, ...props}) {
   return (
@@ -40,6 +40,7 @@ class AppointmentForm extends Component {
   }
 
   render() {
+    const oilChangeTooltip = <Tooltip id="1">~30min</Tooltip>;
     return (
       <form>
         <FieldGroup
@@ -64,10 +65,12 @@ class AppointmentForm extends Component {
             onChange={this.formatPhoneNumber.bind(this)}
           />
         </FormGroup>
-        <FormGroup controlId="formControlsDescriptionProblem">
-          <ControlLabel>Service Requested</ControlLabel>
-          <FormControl componentClass="textarea" placeholder="Eg. Oil change." />
-          <HelpBlock>Please be advised that a call should be made instead for services that require substantial amounts of time.</HelpBlock>
+        <ControlLabel>Services Requested</ControlLabel>
+        <FormGroup controlId="formControlsServices">
+          <OverlayTrigger overlay={oilChangeTooltip}>
+            <Checkbox inline>Oil change</Checkbox>
+          </OverlayTrigger>
+          <Checkbox inline>Wheel alignment</Checkbox>
         </FormGroup>
         <FormGroup>
           <Button type="submit">Book Appointment</Button>

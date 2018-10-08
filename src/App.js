@@ -21,10 +21,11 @@ class App extends Component {
 
   handleClick(e) {
     let src = e.target || e.srcElement;
+    let href = src.href.split('?')[1];
     this.setState({
-      page: this.formatPageName(src.innerHTML),
+      page: this.formatPageName(href),
     });
-    console.log(this.formatPageName(src.innerHTML));
+    console.log(this.formatPageName(href));
   }
 
   render() {
