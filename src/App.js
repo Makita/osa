@@ -16,12 +16,12 @@ class App extends Component {
   }
 
   formatPageName(name) {
-    return name.toLowerCase().replace('#', '');
+    return name.toLowerCase();
   }
 
   handleClick(e) {
     let src = e.target || e.srcElement;
-    let href = src.href.split('?')[1];
+    let href = src.href.split('#')[1];
     this.setState({
       page: this.formatPageName(href),
     });
