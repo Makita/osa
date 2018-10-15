@@ -21,7 +21,7 @@ class AppointmentForm extends Component {
   }
 
   formatPhoneNumber(e) {
-    let src = e.target || e.srcElement;
+    const src = e.target || e.srcElement;
     let cleanText = src.value.replace(/\D/g, '');
     cleanText = cleanText.slice(0,3)+"-"+cleanText.slice(3,6)+"-"+cleanText.slice(6);
     cleanText = cleanText.replace(/-$/, '').slice(0, 12);
@@ -31,8 +31,8 @@ class AppointmentForm extends Component {
 
   validatePhoneNumber() {
     const length = this.state.phoneNumber.length;
-    if(length < 12 && length != 0) return 'error';
-    else if(length == 12) return 'success';
+    if(length < 12 && length !== 0) return 'error';
+    else if(length === 12) return 'success';
   }
 
   handleSubmit(e) {

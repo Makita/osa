@@ -9,14 +9,16 @@ import Footer from './footer/footer';
 class App extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       page: this.formatPageName(window.location.hash) || "info",
     }
-    this.handleClick.bind(this);
+
+    this.handleClick = this.handleClick.bind(this);
   }
 
   formatPageName(name) {
-    return name.toLowerCase();
+    return name.replace('#', '').toLowerCase();
   }
 
   handleClick(e) {
@@ -32,8 +34,8 @@ class App extends Component {
     return (
       <React.Fragment>
         <Header />
-        <Navibar page={this.state.page} handleClick={this.handleClick} app={this} />
-        <Content page={this.state.page} handleClick={this.handleClick} app={this} />
+        <Navibar page={this.state.page} handleClick={this.handleClick} />
+        <Content page={this.state.page} handleClick={this.handleClick} />
         <Footer />
       </React.Fragment>
     );
