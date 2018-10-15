@@ -18,6 +18,8 @@ class AppointmentForm extends Component {
     this.state = {
       phoneNumber: ''
     };
+
+    this.handleSubmit = props.handleSubmit;
   }
 
   formatPhoneNumber(e) {
@@ -35,14 +37,10 @@ class AppointmentForm extends Component {
     else if(length === 12) return 'success';
   }
 
-  handleSubmit(e) {
-    e.preventDefault();
-  }
-
   render() {
     const oilChangeTooltip = <Tooltip id="1">~30min</Tooltip>;
     return (
-      <form>
+      <form onSubmit={this.handleSubmit}>
         <FieldGroup
           id="formControlsFirstName"
           type="text"
@@ -68,9 +66,9 @@ class AppointmentForm extends Component {
         <ControlLabel>Services Requested</ControlLabel>
         <FormGroup controlId="formControlsServices">
           <OverlayTrigger overlay={oilChangeTooltip}>
-            <Checkbox inline>Oil change</Checkbox>
+            <Checkbox inline value="oil_change">Oil change</Checkbox>
           </OverlayTrigger>
-          <Checkbox inline>Wheel alignment</Checkbox>
+          <Checkbox inline value="wheel_alignment">Wheel alignment</Checkbox>
         </FormGroup>
         <FormGroup>
           <Button type="submit">Book Appointment</Button>

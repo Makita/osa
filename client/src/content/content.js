@@ -7,13 +7,19 @@ import Services from './services';
 import Schedule from './schedule';
 
 class Content extends Component {
+  constructor(props) {
+    super(props);
+
+    this.handleSubmit = props.handleSubmit;
+  }
+
   render() {
     return (
       <div id="content">
         <Switch>
           <Route exact path='/' component={Index} />
           <Route exact path='/services' component={Services} />
-          <Route exact path='/appointment' component={AppointmentForm} />
+          <Route exact path='/appointment' render={(props) => <AppointmentForm handleSubmit={this.handleSubmit} />} />
           <Route exact path='/schedule' component={Schedule} />
         </Switch>
       </div>
