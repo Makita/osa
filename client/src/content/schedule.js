@@ -13,10 +13,11 @@ class Schedule extends Component {
       showModal: false,
     };
 
+    this.appointments = props.appointments;
+
     this.monthYearFormat = "MMMM YYYY";
     this.dayNameFormat = "dddd";
     this.dayFormat = "D";
-    this.fullFormat = "MMMM D, YYYY";
 
     this.modal = "";
 
@@ -111,7 +112,7 @@ class Schedule extends Component {
   onDateClick(day) {
     let selected = DateFns.parse(this.state.currentMonth);
     selected = DateFns.setDate(selected, DateFns.getDate(day));
-    this.dateString = DateFns.format(selected, this.fullFormat);
+    this.dateString = DateFns.format(selected);
 
     this.setState({
       selectedDate: day,
@@ -139,7 +140,7 @@ class Schedule extends Component {
           {this.renderDays()}
           {this.renderCells()}
         </section>
-        <ScheduleModal dateString={this.dateString} show={this.state.showModal} handleClose={this.handleClose} />
+        <ScheduleModal dateString={this.dateString} show={this.state.showModal} handleClose={this.handleClose} appointments={this.appointments} />
       </React.Fragment>
     );
   }

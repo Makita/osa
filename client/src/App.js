@@ -11,6 +11,7 @@ class App extends Component {
     super(props);
 
     this.state = {
+      appointments: [],
       oil_change: false,
       wheel_alignment: false,
     }
@@ -18,8 +19,40 @@ class App extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  componentDidMount() {
+    this.get('/appointments')
+      .then((data) => {
+        console.log(data);
+        this.setState({
+          appointments: data || [],
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  // Sends a GET request to the URL given
+  async get(url) {
+    return new Promise((resolve, reject) => {
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', url);
+      xhr.onload = () => {
+        if(xhr.status >= 200 && xhr.status < 300) {
+          resolve(JSON.parse(xhr.response));
+        } else {
+          reject(new Error(xhr.response));
+        }
+      };
+      xhr.onerror = () => {
+        reject(new Error("Failed to GET to " + url + "."));
+      };
+      xhr.send();
+    });
+  }
+
   // Sends a POST request to the URL given
-  // Should use Form Data object for data
+  // Hash for data
   async post(url, data) {
     return new Promise(function(resolve, reject) {
       var xhr = new XMLHttpRequest();
@@ -28,7 +61,7 @@ class App extends Component {
         if(xhr.status >= 200 && xhr.status < 300) {
           resolve(JSON.parse(xhr.response));
         } else {
-          reject(new Error("Server responded with a failure HTTP code: " + xhr.status + "."));
+          reject(new Error(xhr.response));
         }
       };
       xhr.onerror = () => {
@@ -50,6 +83,7 @@ class App extends Component {
       last_name:    document.getElementById("formControlsLastName").value,
       phone_number: document.getElementById("formControlsPhoneNumber").value,
       services:     services,
+      datetime:     document.getElementById("formControlsDate").value + " " + document.getElementById("formControlsTime").value,
     };
     let urlEncode = Object.keys(data).map((key) => encodeURIComponent(key) + '=' + encodeURIComponent(data[key])).join('&');
 
@@ -57,8 +91,8 @@ class App extends Component {
       .then((data) => {
         console.log(data);
       })
-      .catch((error) => {
-        console.log(error);
+      .catch((err) => {
+        console.log(err);
       });
   }
 
@@ -67,7 +101,7 @@ class App extends Component {
       <React.Fragment>
         <Header />
         <Navibar />
-        <Content handleSubmit={this.handleSubmit}/>
+        <Content handleSubmit={this.handleSubmit} appointments={this.state.appointments} />
         <Footer />
       </React.Fragment>
     );

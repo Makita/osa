@@ -12,6 +12,7 @@
     "sqlite3": "^4.0.2"
   },
   "devDependencies": {
+    "@babel/helper-regex": "^7.0.0",
     "concurrently": "^3.5.0"
   }
 }

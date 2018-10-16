@@ -10,7 +10,10 @@ class Content extends Component {
   constructor(props) {
     super(props);
 
+    this.appointments = props.appointments;
+
     this.handleSubmit = props.handleSubmit;
+    this.handleSave = props.handleSave;
   }
 
   render() {
@@ -20,7 +23,7 @@ class Content extends Component {
           <Route exact path='/' component={Index} />
           <Route exact path='/services' component={Services} />
           <Route exact path='/appointment' render={(props) => <AppointmentForm handleSubmit={this.handleSubmit} />} />
-          <Route exact path='/schedule' component={Schedule} />
+          <Route exact path='/schedule' render={(props) => <Schedule appointments={this.appointments} />} />
         </Switch>
       </div>
     );
