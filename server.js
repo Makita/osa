@@ -7,10 +7,20 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
 
 const Appointment = require('./appointment');
+Appointment.make_db();
+
+app.get('/appointments/all', (req, res) => {
+  console.log("Received [GET] /appointments/all");
+  Appointment.all((rows) => {
+    res.status(200).send(rows);
+  });
+});
 
 app.get('/appointments', (req, res) => {
-  console.log("Received [GET] /appointment");
-  res.status(200).send(Appointment.allAfterToday());
+  console.log("Received [GET] /appointments");
+  Appointment.allAfterToday((rows) => {
+    res.status(200).send(rows);
+  });
 });
 
 app.post('/appointment', (req, res) => {
@@ -22,15 +32,13 @@ app.post('/appointment', (req, res) => {
     req.body.last_name,
     req.body.phone_number,
     req.body.services,
-    req.body.datetime
+    req.body.start_time,
+    req.body.end_time
   );
 
-  try {
-    appointment.create();
+  appointment.create(res, (row) => {
     res.status(200).send(req.body);
-  } catch(err) {
-    res.status(500).send(err);
-  }
+  });
 });
 
 app.listen(port, () => console.log(`Listening on port ${port}`));

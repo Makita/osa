@@ -21,12 +21,18 @@ class AppointmentForm extends Component {
 
     this.state = {
       phoneNumber: '',
-      date: moment(),
+      date: moment().add(1, 'days'),
+      time: moment().add(1, 'days').hours(9).minutes(0).seconds(0),
     };
 
     this.handleSubmit = props.handleSubmit;
     this.handleDateChange = this.handleDateChange.bind(this);
     this.handleTimeChange = this.handleTimeChange.bind(this);
+  }
+
+  isSunday(date) {
+    const day = date.day();
+    return day !== 0;
   }
 
   formatPhoneNumber(e) {
@@ -96,6 +102,7 @@ class AppointmentForm extends Component {
             selected={this.state.date}
             onChange={this.handleDateChange}
             minDate={moment().add(1, 'days')}
+            filterDate={this.isSunday}
             className="form-control"
             id="formControlsDate"
           />

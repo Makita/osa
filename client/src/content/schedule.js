@@ -13,15 +13,19 @@ class Schedule extends Component {
       showModal: false,
     };
 
-    this.appointments = props.appointments;
-
     this.monthYearFormat = "MMMM YYYY";
     this.dayNameFormat = "dddd";
     this.dayFormat = "D";
 
     this.modal = "";
 
+    this.getAppointments = props.getAppointments;
+
     this.handleClose = this.handleClose.bind(this);
+  }
+
+  componentWillReceiveProps(props) {
+    this.appointments = props.appointments;
   }
 
   renderHeader() {
@@ -113,6 +117,8 @@ class Schedule extends Component {
     let selected = DateFns.parse(this.state.currentMonth);
     selected = DateFns.setDate(selected, DateFns.getDate(day));
     this.dateString = DateFns.format(selected);
+
+    this.getAppointments();
 
     this.setState({
       selectedDate: day,
