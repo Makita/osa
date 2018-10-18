@@ -25,6 +25,7 @@ class Appointment {
   static all(callback) {
     db.all("SELECT first_name, last_name, phone_number, services, start_time, end_time FROM appointments;", (err, rows) => {
       if(err) console.log("Error:", err);
+      else console.log("Appointment.all() call successful.");
       callback(rows);
     });
   }
@@ -32,9 +33,10 @@ class Appointment {
   static allAfterToday(callback) {
     db.all(`SELECT first_name, last_name, phone_number, services, start_time, end_time
     FROM appointments
-    WHERE start_time >= date('now', '+1 day');`,
+    WHERE start_time >= date('now', 'localtime', '+1 day');`,
     (err, rows) => {
       if(err) console.log("Error:", err);
+      else console.log("Appointment.allAfterToday() call successful.");
       callback(rows);
     });
   }

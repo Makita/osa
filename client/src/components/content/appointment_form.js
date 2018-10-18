@@ -16,30 +16,24 @@ function FieldGroup({id, label, help, ...props}) {
 }
 
 class AppointmentForm extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      phoneNumber: '',
-      date: moment().add(1, 'days'),
-      time: moment().add(1, 'days').hours(9).minutes(0).seconds(0),
-    };
-
-    this.handleSubmit = props.handleSubmit;
-    this.handleDateChange = this.handleDateChange.bind(this);
-    this.handleTimeChange = this.handleTimeChange.bind(this);
-  }
+  state = {
+    phoneNumber: '',
+    date: moment().add(1, 'days'),
+    time: moment().add(1, 'days').hours(9).minutes(0).seconds(0),
+  };
 
   isSunday(date) {
     const day = date.day();
     return day !== 0;
   }
 
-  formatPhoneNumber(e) {
+  formatPhoneNumber = (e) => {
     const src = e.target || e.srcElement;
+
     let cleanText = src.value.replace(/\D/g, '');
-    cleanText = cleanText.slice(0,3)+"-"+cleanText.slice(3,6)+"-"+cleanText.slice(6);
-    cleanText = cleanText.replace(/-$/, '').slice(0, 12);
+    cleanText = cleanText.slice(0,3)+"-"+cleanText.slice(3,6)+"-"+cleanText.slice(6,10);
+    cleanText = cleanText.replace(/-$/, '');
+    if(cleanText === "-") cleanText = "";
     src.value = cleanText;
     this.setState({ phoneNumber: cleanText });
   }
@@ -51,22 +45,13 @@ class AppointmentForm extends Component {
   }
 
   // Get the current moment and round it to the nearest multiple of 30
-  handleDateChange(date) {
-    this.setState({
-      date: date,
-    });
-  }
-
-  handleTimeChange(time) {
-    this.setState({
-      time: time,
-    });
-  }
+  handleDateChange = (date) => { this.setState({ date }); };
+  handleTimeChange = (time) => { this.setState({ time }); };
 
   render() {
     const oilChangeTooltip = <Tooltip id="1">~30min</Tooltip>;
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form onSubmit={this.props.handleSubmit}>
         <FieldGroup
           id="formControlsFirstName"
           type="text"
@@ -86,7 +71,7 @@ class AppointmentForm extends Component {
             label="Phone Number"
             placeholder="123-456-7890"
             pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
-            onChange={this.formatPhoneNumber.bind(this)}
+            onChange={this.formatPhoneNumber}
           />
         </FormGroup>
         <ControlLabel>Services Requested</ControlLabel>
